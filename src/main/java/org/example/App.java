@@ -1,28 +1,103 @@
 package org.example;
 
-import org.example.model.BinaryTree;
-import org.example.model.Dictionary;
-import org.example.model.DynamicBinaryTree;
-import org.example.util.BinaryTreeUtil;
+import org.example.model.DynamicQueue;
+import org.example.model.Queue;
+import org.example.tpo.QueueOfQueue;
 
 public class App {
 
     public static void main(String[] args) {
-        // Construir el árbol del ejemplo:
-        // Nivel 0: nodo 1 (raíz)
-        // Nivel 1: nodos 5 y 3
-        // Nivel 2: el nodo 5 tiene hijos 7 y 6
-        BinaryTree tree = new DynamicBinaryTree(1);
-        tree.addLeft(5);
-        tree.addRight(3);
-        tree.getLeft().addLeft(7);
-        tree.getLeft().addRight(6);
 
-        // Mapear el árbol a un diccionario: clave = valor del nodo, valor = nivel
-        Dictionary dict = BinaryTreeUtil.map(tree);
+        // Creamos algunas colas internas
+        Queue q1 = new DynamicQueue();
+        q1.add(1);
+        q1.add(2);
+        q1.add(3);
 
-        // Imprimir el diccionario
-        System.out.println("Mapa del árbol (nodo -> nivel):");
-        // Se asume que dict.getKeys() retorna un Set iterable
+        Queue q2 = new DynamicQueue();
+        q2.add(4);
+        q2.add(5);
+        q2.add(6);
+
+        // Creamos la primera QueueOfQueue y le agregamos q1, q2
+        QueueOfQueue qoq1 = new QueueOfQueue();
+        qoq1.add(q1);
+        qoq1.add(q2);
+
+        System.out.println("qoq1 (original):");
+        printQueueOfQueue(qoq1);
+
+        // Creamos otra cola y otra QueueOfQueue para concatenar
+        Queue q3 = new DynamicQueue();
+        q3.add(7);
+        q3.add(8);
+        q3.add(9);
+
+        QueueOfQueue qoq2 = new QueueOfQueue();
+        qoq2.add(q3);
+
+        // 1) Probamos concatenate
+        QueueOfQueue concatenated = qoq1.concatenate(qoq2);
+        System.out.println("\nConcatenated (qoq1 + qoq2):");
+        printQueueOfQueue(concatenated);
+
+        // 2) Probamos flat
+        Queue flattened = concatenated.flat();
+        System.out.print("\nFlattened queue (todos los valores concatenados en una sola cola): ");
+        printQueue(flattened);
+        System.out.println();
+
+        // 3) Probamos reverseWithDepth en qoq1
+        qoq1.reverseWithDepth();
+        System.out.println("\nqoq1 después de reverseWithDepth (se invierte el orden y cada cola interna):");
+        printQueueOfQueue(qoq1);
+    }
+
+    /**
+     * Imprime el contenido de una Queue sin destruirla (usa una cola temporal).
+     */
+    private static void printQueue(Queue q) {
+        Queue temp = new DynamicQueue();
+        System.out.print("[ ");
+        while(!q.isEmpty()) {
+            int val = q.getFirst();
+            System.out.print(val + " ");
+            q.remove();
+            temp.add(val);
+        }
+        System.out.print("]");
+
+        // Restauramos la cola original
+        while(!temp.isEmpty()) {
+            q.add(temp.getFirst());
+            temp.remove();
+        }
+    }
+
+    /**
+     * Imprime el contenido de una QueueOfQueue sin destruirla (usa una QueueOfQueue temporal).
+     */
+    private static void printQueueOfQueue(QueueOfQueue qoq) {
+        QueueOfQueue tempQoq = new QueueOfQueue();
+        System.out.println("{");
+        while(!qoq.isEmpty()) {
+            Queue frontQueue = qoq.getFirst();
+            qoq.remove();
+
+            // Imprimimos la cola que está en el frente
+            System.out.print("  ");
+            printQueue(frontQueue);
+            System.out.println();
+
+            // Volvemos a guardarla en una cola auxiliar
+            tempQoq.add(frontQueue);
+        }
+        System.out.println("}");
+
+        // Restauramos el qoq original
+        while(!tempQoq.isEmpty()) {
+            qoq.add(tempQoq.getFirst());
+            tempQoq.remove();
+        }
     }
 }
