@@ -36,30 +36,32 @@ public class App {
         QueueOfQueue qoq2 = new QueueOfQueue();
         qoq2.add(q3);
 
-        // 1) Probamos concatenate
+        // Probamos concatenate
         QueueOfQueue concatenated = qoq1.concatenate(qoq2);
         System.out.println("\nConcatenated (qoq1 + qoq2):");
         printQueueOfQueue(concatenated);
 
-        // 2) Probamos flat
+        // Probamos flat
         Queue flattened = concatenated.flat();
         System.out.print("\nFlattened queue (todos los valores concatenados en una sola cola): ");
         printQueue(flattened);
         System.out.println();
 
-        // 3) Probamos reverseWithDepth en qoq1
+        // Probamos reverseWithDepth en qoq1 y luego aplicamos flat
         qoq1.reverseWithDepth();
-        System.out.println("\nqoq1 después de reverseWithDepth (se invierte el orden y cada cola interna):");
+        System.out.println("\nqoq1 después de reverseWithDepth:");
         printQueueOfQueue(qoq1);
+
+        Queue flatAfterReverse = qoq1.flat();
+        System.out.print("\nqoq1 después de reverseWithDepth y flat: ");
+        printQueue(flatAfterReverse);
+        System.out.println();
     }
 
-    /**
-     * Imprime el contenido de una Queue sin destruirla (usa una cola temporal).
-     */
     private static void printQueue(Queue q) {
         Queue temp = new DynamicQueue();
         System.out.print("[ ");
-        while(!q.isEmpty()) {
+        while (!q.isEmpty()) {
             int val = q.getFirst();
             System.out.print(val + " ");
             q.remove();
@@ -67,35 +69,28 @@ public class App {
         }
         System.out.print("]");
 
-        // Restauramos la cola original
-        while(!temp.isEmpty()) {
+        while (!temp.isEmpty()) {
             q.add(temp.getFirst());
             temp.remove();
         }
     }
 
-    /**
-     * Imprime el contenido de una QueueOfQueue sin destruirla (usa una QueueOfQueue temporal).
-     */
     private static void printQueueOfQueue(QueueOfQueue qoq) {
         QueueOfQueue tempQoq = new QueueOfQueue();
         System.out.println("{");
-        while(!qoq.isEmpty()) {
+        while (!qoq.isEmpty()) {
             Queue frontQueue = qoq.getFirst();
             qoq.remove();
 
-            // Imprimimos la cola que está en el frente
             System.out.print("  ");
             printQueue(frontQueue);
             System.out.println();
 
-            // Volvemos a guardarla en una cola auxiliar
             tempQoq.add(frontQueue);
         }
         System.out.println("}");
 
-        // Restauramos el qoq original
-        while(!tempQoq.isEmpty()) {
+        while (!tempQoq.isEmpty()) {
             qoq.add(tempQoq.getFirst());
             tempQoq.remove();
         }
