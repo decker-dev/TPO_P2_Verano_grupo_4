@@ -19,7 +19,6 @@ public class DynamicStack<T> implements Stack<T> {
 
     @Override
     public void add(T a) {
-        // Se agrega un nuevo nodo al inicio, el cual apunta al tope actual.
         this.top = new Node<>(a, this.top);
     }
 
