@@ -2,7 +2,7 @@ package org.example;
 
 import org.example.model.DynamicQueue;
 import org.example.model.Queue;
-import org.example.tpo.*;
+import org.example.tpo.punto3.QueueOfQueue;
 
 public class App {
 

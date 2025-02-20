@@ -1,4 +1,4 @@
-package org.example.tpo;
+package org.example.tpo.punto3;
 
 import org.example.model.Queue;
 
