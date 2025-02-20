@@ -1,8 +1,6 @@
-package org.example.tpo;
+package org.example.tpo.punto1.punto1_1;
 
-import org.example.model.Stack;
-
-public class StaticQueueOfStacks implements QueueOfStacks{
+public class StaticQueueOfStacks implements QueueOfStacks {
     private final Stack[] array;
     private int count;
 

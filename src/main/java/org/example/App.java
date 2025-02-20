@@ -2,11 +2,7 @@ package org.example;
 
 import org.example.model.DynamicQueue;
 import org.example.model.Queue;
-import org.example.model.Stack;
-import org.example.model.StaticStack;
-import org.example.tpo.QueueOfQueue;
-import org.example.tpo.QueueOfStacks;
-import org.example.tpo.StaticQueueOfStacks;
+import org.example.tpo.*;
 
 public class App {
 
@@ -106,51 +102,5 @@ public class App {
             qoq.add(tempQoq.getFirst());
             tempQoq.remove();
         }
-    }
-
-    private static void ejercicio1() {
-        QueueOfStacks queueOfStacks = new StaticQueueOfStacks();
-        Stack stack1 = new StaticStack();
-        stack1.add(3);
-        stack1.add(2);
-        stack1.add(1);
-        queueOfStacks.add(stack1);
-        Stack stack2 = new StaticStack();
-        stack2.add(6);
-        stack2.add(5);
-        stack2.add(4);
-        queueOfStacks.add(stack2);
-        Stack stack3 = new StaticStack();
-        stack3.add(9);
-        stack3.add(8);
-        stack3.add(7);
-        queueOfStacks.add(stack3);
-
-        int traza = calcularTraza(queueOfStacks);
-        System.out.println("La traza de la matriz es " + traza + ".\n");
-    }
-
-    private static int calcularTraza(QueueOfStacks queueOfStacks){
-        int traza = 0;
-        boolean firstStack = true;
-        int size = 0;
-        while (!queueOfStacks.isEmpty()) {
-            Stack stack = queueOfStacks.getFirst();
-            int valor = 0;
-            for (int i = 0; !stack.isEmpty() && (firstStack || i < size); i++) {
-                valor = stack.getTop();
-                stack.remove();
-                if(firstStack) {
-                    size++;
-                }
-            }
-            traza += valor;
-            queueOfStacks.remove();
-            firstStack = false;
-            size--;
-
-        }
-
-        return traza;
     }
 }
