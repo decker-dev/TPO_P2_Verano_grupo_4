@@ -1,6 +1,6 @@
 package org.example.tpo;
 
-public interface PriorityQueue<T, P extends Comparable<P>> {
+public interface PriorityQueue<T, P extends Comparable<?>> {
 
     /**
      * Devuelve el primer elemento (el de mayor prioridad, es decir,
