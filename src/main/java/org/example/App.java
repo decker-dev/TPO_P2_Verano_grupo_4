@@ -8,9 +8,6 @@ public class App {
 
     public static void main(String[] args) {
 
-        //ejercicio1
-        ejercicio1();
-
         // Creamos algunas colas internas
         Queue q1 = new DynamicQueue();
         q1.add(1);
