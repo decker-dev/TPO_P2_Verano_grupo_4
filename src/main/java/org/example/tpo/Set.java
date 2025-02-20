@@ -2,13 +2,28 @@ package org.example.tpo;
 
 public interface Set<T> {
 
+    /**
+     * Agrega un elemento al conjunto.
+     * @param a elemento a agregar.
+     */
     void add(T a);
+
+    /**
+     * Remueve el elemento del conjunto.
+     * @param a elemento a remover.
+     */
     void remove(T a);
+
+    /**
+     * Indica si el conjunto está vacío.
+     * @return true si está vacío, false en caso contrario.
+     */
     boolean isEmpty();
 
     /**
-     * Precondición: No se puede elegir un elemento de un conjunto vacío
-     * @return un elemento de forma aleatoria
+     * Selecciona y devuelve un elemento aleatorio del conjunto.
+     * Precondición: el conjunto no debe estar vacío.
+     * @return un elemento aleatorio.
      */
     T choose();
 }
