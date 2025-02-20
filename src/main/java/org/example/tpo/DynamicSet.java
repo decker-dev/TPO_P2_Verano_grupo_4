@@ -29,7 +29,6 @@ public class DynamicSet<T> implements Set<T> {
             aux = aux.getNext();
         }
 
-        // Se agrega el nuevo elemento al inicio de la lista
         this.node = new Node<>(a, this.node);
         this.count++;
     }
@@ -40,7 +39,6 @@ public class DynamicSet<T> implements Set<T> {
             return;
         }
 
-        // Caso: sólo hay un elemento
         if (this.node.getNext() == null) {
             if (this.node.getValue().equals(a)) {
                 this.node = null;
@@ -49,7 +47,6 @@ public class DynamicSet<T> implements Set<T> {
             return;
         }
 
-        // Si el primer nodo contiene el elemento a remover
         if (this.node.getValue().equals(a)) {
             this.node = this.node.getNext();
             this.count--;
@@ -79,7 +76,6 @@ public class DynamicSet<T> implements Set<T> {
         if (this.isEmpty()) {
             throw new RuntimeException("No se puede elegir un elemento de un conjunto vacío");
         }
-        // Si sólo hay un elemento, se devuelve ese
         if (this.node.getNext() == null) {
             return this.node.getValue();
         }
