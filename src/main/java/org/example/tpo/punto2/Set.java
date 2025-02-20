@@ -1,4 +1,4 @@
-package org.example.tpo;
+package org.example.tpo.punto2;
 
 public interface Set<T> {
 

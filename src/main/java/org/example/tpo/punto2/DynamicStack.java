@@ -1,4 +1,4 @@
-package org.example.tpo;
+package org.example.tpo.punto2;
 
 public class DynamicStack<T> implements Stack<T> {
 

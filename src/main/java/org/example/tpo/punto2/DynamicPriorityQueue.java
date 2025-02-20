@@ -1,4 +1,4 @@
-package org.example.tpo;
+package org.example.tpo.punto2;
 
 public class DynamicPriorityQueue<T, P extends Comparable<P>> implements PriorityQueue<T, P> {
 
