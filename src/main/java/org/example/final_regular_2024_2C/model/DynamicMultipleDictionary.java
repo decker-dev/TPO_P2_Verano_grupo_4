@@ -51,38 +51,73 @@ public class DynamicMultipleDictionary implements MultipleDictionary {
 
     @Override
     public void add(int key, int value) {
+        // Caso base: si la estructura está vacía, se crea el primer nodo
         if (this.node == null) {
             this.node = new MultipleDictionaryNode(key, new Node(value, null), null);
             return;
         }
 
-        MultipleDictionaryNode aux = this.node;
-        while (aux.getNext() != null) {
-            if (aux.getKey() == key) {
-                Node aux2 = aux.getValue();
-
-                while (aux2.getNext() != null) {
-                    aux2 = aux2.getNext();
-                }
-
-                aux2.setNext(new Node(value, null));
-                return;
-            }
-            aux = aux.getNext();
-        }
-
-        if (aux.getKey() == key) {
-            Node aux2 = aux.getValue();
-
-            while (aux2.getNext() != null) {
-                aux2 = aux2.getNext();
-            }
-
-            aux2.setNext(new Node(value, null));
+        // Si la nueva clave es menor que la del primer nodo, inserción al inicio
+        if (key < this.node.getKey()) {
+            this.node = new MultipleDictionaryNode(key, new Node(value, null), this.node);
             return;
         }
 
-        aux.setNext(new MultipleDictionaryNode(key, new Node(value, null), null));
+        MultipleDictionaryNode prev = null;
+        MultipleDictionaryNode current = this.node;
+
+        // Recorrer la lista hasta hallar la posición donde la clave es mayor o igual a la nueva clave
+        while (current != null && current.getKey() < key) {
+            prev = current;
+            current = current.getNext();
+        }
+
+        // Si la clave ya existe, se inserta el valor ordenadamente (sin duplicados)
+        if (current != null && current.getKey() == key) {
+            insertValueSorted(current, value);
+        } else {
+            // Si la clave no existe, se crea un nuevo nodo y se inserta en orden
+            MultipleDictionaryNode newNode = new MultipleDictionaryNode(key, new Node(value, null), current);
+            if (prev != null) {
+                prev.setNext(newNode);
+            }
+        }
+    }
+
+    /**
+     * Inserta el valor en la lista de valores del nodo, manteniendo el orden y evitando duplicados.
+     */
+    private void insertValueSorted(MultipleDictionaryNode dictNode, int value) {
+        Node head = dictNode.getValue();
+
+        // Si el nuevo valor es menor que el valor del primer nodo, se inserta al inicio
+        if (value < head.getValue()) {
+            dictNode.setValue(new Node(value, head));
+            return;
+        }
+
+        // Si el valor es igual al del primer nodo, se evita la duplicación
+        if (head.getValue() == value) {
+            return;
+        }
+
+        Node prev = head;
+        Node current = head.getNext();
+
+        // Recorrer la lista hasta encontrar la posición de inserción
+        while (current != null && current.getValue() < value) {
+            prev = current;
+            current = current.getNext();
+        }
+
+        // Si se encuentra un valor duplicado, no se inserta
+        if (current != null && current.getValue() == value) {
+            return;
+        }
+
+        // Inserta el nuevo valor manteniendo el orden
+        Node newNode = new Node(value, current);
+        prev.setNext(newNode);
     }
 
     @Override
