@@ -1,6 +1,6 @@
 package org.example.final_adelantado_2024_2C.model;
 
-import org.example.final_adelantado_2024_2C.nodes.Node;
+import org.example.final_adelantado_2024_2C.model.nodes.Node;
 
 public class App {
     public static void main(String[] args) {

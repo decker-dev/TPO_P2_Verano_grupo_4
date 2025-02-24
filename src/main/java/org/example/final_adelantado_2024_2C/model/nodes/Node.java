@@ -1,4 +1,4 @@
-package org.example.final_adelantado_2024_2C.nodes;
+package org.example.final_adelantado_2024_2C.model.nodes;
 
 public class Node {
 
