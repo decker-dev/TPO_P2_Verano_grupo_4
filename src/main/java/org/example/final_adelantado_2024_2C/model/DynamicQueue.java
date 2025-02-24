@@ -1,7 +1,6 @@
 package org.example.final_adelantado_2024_2C.model;
 
 import org.example.final_adelantado_2024_2C.nodes.Node;
-import org.example.model.DynamicSet;
 
 public class DynamicQueue implements Queue {
 
