@@ -1,9 +1,7 @@
-package org.example.final_regular_2024_2C.model.model;
+package org.example.final_regular_2024_2C.model;
 
-import org.example.model.MultipleDictionary;
-import org.example.model.*;
-import org.example.model.nodes.MultipleDictionaryNode;
-import org.example.model.nodes.Node;
+import org.example.final_regular_2024_2C.model.nodes.MultipleDictionaryNode;
+import org.example.final_regular_2024_2C.model.nodes.Node;
 
 public class DynamicMultipleDictionary implements MultipleDictionary {
 
@@ -40,7 +38,7 @@ public class DynamicMultipleDictionary implements MultipleDictionary {
 
     @Override
     public Set getKeys() {
-        Set result = new StaticSet();
+        Set result = new DynamicSet();
 
         MultipleDictionaryNode aux = this.node;
         while (aux != null) {

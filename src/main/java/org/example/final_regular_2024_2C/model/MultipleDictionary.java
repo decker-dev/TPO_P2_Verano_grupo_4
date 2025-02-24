@@ -1,7 +1,5 @@
-package org.example.final_regular_2024_2C.model.model;
+package org.example.final_regular_2024_2C.model;
 
-import org.example.model.List;
-import org.example.model.Set;
 
 public interface MultipleDictionary {
 

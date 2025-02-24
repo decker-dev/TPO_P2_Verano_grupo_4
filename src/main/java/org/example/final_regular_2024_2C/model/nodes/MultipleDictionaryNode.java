@@ -1,6 +1,5 @@
-package org.example.final_regular_2024_2C.model.model.nodes;
+package org.example.final_regular_2024_2C.model.nodes;
 
-import org.example.model.nodes.Node;
 
 public class MultipleDictionaryNode {
 
