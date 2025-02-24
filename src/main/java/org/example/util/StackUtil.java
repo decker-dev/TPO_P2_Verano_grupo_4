@@ -5,22 +5,26 @@ import org.example.model.StaticStack;
 
 public class StackUtil {
 
+    private StackUtil() {
+
+    }
+
     public static Stack copy(Stack stack) {
         Stack aux = new StaticStack();
         Stack aux2 = new StaticStack();
 
-        while(!stack.isEmpty()) {
+        while (!stack.isEmpty()) {
             aux.add(stack.getTop());
             aux2.add(stack.getTop());
             stack.remove();
         }
 
-        while(!aux2.isEmpty()) {
+        while (!aux2.isEmpty()) {
             stack.add(aux2.getTop());
             aux2.remove();
         }
 
-        while(!aux.isEmpty()) {
+        while (!aux.isEmpty()) {
             aux2.add(aux.getTop());
             aux.remove();
         }
@@ -30,7 +34,7 @@ public class StackUtil {
 
     public static void print(Stack stack) {
         Stack copy = copy(stack);
-        while(!copy.isEmpty()) {
+        while (!copy.isEmpty()) {
             System.out.println(copy.getTop());
             copy.remove();
         }
@@ -43,8 +47,8 @@ public class StackUtil {
         Stack aux3 = new StaticStack();
 
         boolean p = true;
-        while(!copy.isEmpty()) {
-            if(p) {
+        while (!copy.isEmpty()) {
+            if (p) {
                 aux.add(copy.getTop());
             } else {
                 aux2.add(copy.getTop());
@@ -53,7 +57,7 @@ public class StackUtil {
             aux3.add(copy.getTop());
         }
 
-        while(!aux2.isEmpty()) {
+        while (!aux2.isEmpty()) {
             aux3.remove();
             aux2.remove();
         }

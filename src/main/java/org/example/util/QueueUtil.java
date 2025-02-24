@@ -4,17 +4,22 @@ import org.example.model.Queue;
 import org.example.model.StaticQueue;
 
 public class QueueUtil {
+
+    private QueueUtil() {
+
+    }
+
     public static Queue copy(Queue queue) {
         Queue aux = new StaticQueue();
         Queue aux2 = new StaticQueue();
 
-        while(!queue.isEmpty()) {
+        while (!queue.isEmpty()) {
             aux.add(queue.getFirst());
             aux2.add(queue.getFirst());
             queue.remove();
         }
 
-        while(!aux2.isEmpty()) {
+        while (!aux2.isEmpty()) {
             queue.add(aux2.getFirst());
             aux2.remove();
         }

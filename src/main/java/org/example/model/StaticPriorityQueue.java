@@ -16,15 +16,15 @@ public class StaticPriorityQueue implements PriorityQueue {
 
     @Override
     public int getFirst() {
-        if(this.isEmpty()) {
-           throw new RuntimeException("No se puede obtener el valor de una cola vacía");
+        if (this.isEmpty()) {
+            throw new RuntimeException("No se puede obtener el valor de una cola vacía");
         }
         return this.values[0];
     }
 
     @Override
     public int getPriority() {
-        if(this.isEmpty()) {
+        if (this.isEmpty()) {
             throw new RuntimeException("No se puede obtener la prioridad de una cola vacía");
         }
         return this.priorities[0];
@@ -37,7 +37,7 @@ public class StaticPriorityQueue implements PriorityQueue {
 
     @Override
     public void add(int a, int priority) {
-        if(this.count == MAX) { // TODO Esto debería estar en todas las estructuras
+        if (this.count == MAX) { // TODO Esto debería estar en todas las estructuras
             throw new RuntimeException("No se tiene capacidad para almacenar un nuevo elemento");
         }
         if (this.isEmpty()) {
@@ -67,12 +67,12 @@ public class StaticPriorityQueue implements PriorityQueue {
 
         int index = findIndex(priority);
 
-        if(index != -1) {
+        if (index != -1) {
             int candidate = index;
-            while(this.priorities[candidate] == priority) {
+            while (this.priorities[candidate] == priority) {
                 candidate++;
             }
-            for (int i = this.count - 1; i >= candidate ; i--) {
+            for (int i = this.count - 1; i >= candidate; i--) {
                 this.values[i + 1] = this.values[i];
                 this.priorities[i + 1] = this.priorities[i];
             }
@@ -83,11 +83,11 @@ public class StaticPriorityQueue implements PriorityQueue {
         }
 
         int candidate = 0;
-        while(this.priorities[candidate] <= priority) {
+        while (this.priorities[candidate] <= priority) {
             candidate++;
         }
 
-        for (int i = this.count - 1; i >= candidate ; i--) {
+        for (int i = this.count - 1; i >= candidate; i--) {
             this.values[i + 1] = this.values[i];
             this.priorities[i + 1] = this.priorities[i];
         }
@@ -96,8 +96,8 @@ public class StaticPriorityQueue implements PriorityQueue {
     }
 
     private int findIndex(int priority) {
-        for(int i = 0; i < this.count; i++) {
-            if(this.priorities[i] == priority) {
+        for (int i = 0; i < this.count; i++) {
+            if (this.priorities[i] == priority) {
                 return i;
             }
         }
@@ -106,11 +106,11 @@ public class StaticPriorityQueue implements PriorityQueue {
 
     @Override
     public void remove() {
-        if(this.isEmpty()) {
+        if (this.isEmpty()) {
             throw new RuntimeException("No se puede desacolar una cola vacía");
         }
 
-        for(int i = 0; i < this.count - 1; i++) {
+        for (int i = 0; i < this.count - 1; i++) {
             this.values[i] = this.values[i + 1];
             this.priorities[i] = this.priorities[i + 1];
         }

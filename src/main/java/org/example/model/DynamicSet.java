@@ -7,8 +7,8 @@ import java.util.Random;
 
 public class DynamicSet implements Set {
 
+    private final Random random;
     private Node node;
-    private Random random;
     private int count;
 
     public DynamicSet() {
@@ -17,15 +17,15 @@ public class DynamicSet implements Set {
 
     @Override
     public void add(int a) {
-        if(this.isEmpty()) {
+        if (this.isEmpty()) {
             this.node = new Node(a, null);
             this.count++;
             return;
         }
 
         Node aux = this.node;
-        while(!Objects.isNull(aux)) {
-            if(aux.getValue() == a) {
+        while (!Objects.isNull(aux)) {
+            if (aux.getValue() == a) {
                 return;
             }
             aux = aux.getNext();
@@ -37,19 +37,19 @@ public class DynamicSet implements Set {
 
     @Override
     public void remove(int a) {
-        if(this.isEmpty()) {
+        if (this.isEmpty()) {
             return;
         }
 
-        if(this.node.getNext() == null) {
-            if(this.node.getValue() == a) {
+        if (this.node.getNext() == null) {
+            if (this.node.getValue() == a) {
                 this.node = null;
                 this.count--;
             }
             return;
         }
 
-        if(this.node.getValue() == a) {
+        if (this.node.getValue() == a) {
             this.node = this.node.getNext();
             this.count--;
             return;
@@ -57,8 +57,8 @@ public class DynamicSet implements Set {
 
         Node backup = this.node;
         Node aux = this.node.getNext();
-        while(!Objects.isNull(aux)) {
-            if(aux.getValue() == a) {
+        while (!Objects.isNull(aux)) {
+            if (aux.getValue() == a) {
                 backup.setNext(aux.getNext());
                 this.count--;
                 return;
@@ -75,18 +75,18 @@ public class DynamicSet implements Set {
 
     @Override
     public int choose() {
-        if(this.isEmpty()) {
+        if (this.isEmpty()) {
             throw new RuntimeException("No se puede elegir un elemento de un conjunto vacío");
         }
-        if(this.node.getNext() == null) {
+        if (this.node.getNext() == null) {
             return this.node.getValue();
         }
         int randomIndex = random.nextInt(count);
 
         int i = 0;
         Node aux = this.node;
-        while(i < count) {
-            if(i == randomIndex) {
+        while (i < count) {
+            if (i == randomIndex) {
                 return aux.getValue();
             }
             i++;

@@ -6,10 +6,6 @@ public class MultipleDictionaryNode {
     private Node value;
     private MultipleDictionaryNode next;
 
-    public MultipleDictionaryNode() {
-
-    }
-
     public MultipleDictionaryNode(int key, Node value, MultipleDictionaryNode next) {
         this.key = key;
         this.value = value;

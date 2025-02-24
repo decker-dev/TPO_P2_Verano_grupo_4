@@ -24,23 +24,23 @@ public class StaticBinaryTree implements BinaryTree {
 
     @Override
     public BinaryTree getLeft() {
-        if(this.array[2 * indexRoot + 1] == null) {
+        if (this.array[2 * indexRoot + 1] == null) {
             return null;
         }
-        return new StaticBinaryTree(2*indexRoot + 1, array);
+        return new StaticBinaryTree(2 * indexRoot + 1, array);
     }
 
     @Override
     public BinaryTree getRight() {
-        if(this.array[2 * indexRoot + 2] == null) {
+        if (this.array[2 * indexRoot + 2] == null) {
             return null;
         }
-        return new StaticBinaryTree(2*indexRoot + 2, array);
+        return new StaticBinaryTree(2 * indexRoot + 2, array);
     }
 
     @Override
     public void addLeft(int a) {
-        if(this.array[2*indexRoot + 1] != null) {
+        if (this.array[2 * indexRoot + 1] != null) {
             throw new RuntimeException("Ya existe un hijo izquierdo");
         }
         this.array[2 * indexRoot + 1] = a;
@@ -48,7 +48,7 @@ public class StaticBinaryTree implements BinaryTree {
 
     @Override
     public void addRight(int a) {
-        if(this.array[2 * indexRoot + 2] != null) {
+        if (this.array[2 * indexRoot + 2] != null) {
             throw new RuntimeException("Ya existe un hijo derecho");
         }
         this.array[2 * indexRoot + 2] = a;
@@ -57,22 +57,22 @@ public class StaticBinaryTree implements BinaryTree {
     @Override
     public void removeLeft() {
         BinaryTree left = this.getLeft();
-        if(left == null) {
+        if (left == null) {
             return;
         }
         left.removeLeft();
         left.removeRight();
-        this.array[2*indexRoot + 1] = null;
+        this.array[2 * indexRoot + 1] = null;
     }
 
     @Override
     public void removeRight() {
         BinaryTree right = this.getRight();
-        if(right == null) {
+        if (right == null) {
             return;
         }
         right.removeLeft();
         right.removeRight();
-        this.array[2*indexRoot + 2] = null;
+        this.array[2 * indexRoot + 2] = null;
     }
 }

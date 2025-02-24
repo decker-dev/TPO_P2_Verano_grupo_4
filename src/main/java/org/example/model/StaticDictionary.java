@@ -12,11 +12,11 @@ public class StaticDictionary implements Dictionary {
 
     @Override
     public int get(int key) {
-        if(count == 0) {
+        if (count == 0) {
             throw new RuntimeException("No se puede obtener un valor de una estructura vacía");
         }
-        for(int i = 0; i < count; i++) {
-            if(matrix[i][0] == key) {
+        for (int i = 0; i < count; i++) {
+            if (matrix[i][0] == key) {
                 return matrix[i][1];
             }
         }
@@ -26,7 +26,7 @@ public class StaticDictionary implements Dictionary {
     @Override
     public Set getKeys() {
         Set result = new StaticSet();
-        for(int i = 0; i < count; i++) {
+        for (int i = 0; i < count; i++) {
             result.add(matrix[i][0]);
         }
         return result;
@@ -34,16 +34,16 @@ public class StaticDictionary implements Dictionary {
 
     @Override
     public void add(int key, int value) {
-        if(count == 0) {
+        if (count == 0) {
             matrix[0][0] = key;
             matrix[0][1] = value;
             count++;
             return;
         }
 
-        for(int i = 0; i < count; i++) {
-            if(matrix[i][0] == key) {
-                if(matrix[i][1] == value) {
+        for (int i = 0; i < count; i++) {
+            if (matrix[i][0] == key) {
+                if (matrix[i][1] == value) {
                     throw new RuntimeException("El par ya existe");
                 }
                 throw new RuntimeException("La clave ya existe");
@@ -56,10 +56,10 @@ public class StaticDictionary implements Dictionary {
 
     @Override
     public void remove(int key) {
-        for(int i = 0; i < count; i++) {
-            if(matrix[i][0] == key) {
-                matrix[i][0] = matrix[count-1][0];
-                matrix[i][1] = matrix[count-1][1];
+        for (int i = 0; i < count; i++) {
+            if (matrix[i][0] == key) {
+                matrix[i][0] = matrix[count - 1][0];
+                matrix[i][1] = matrix[count - 1][1];
                 count--;
                 return;
             }

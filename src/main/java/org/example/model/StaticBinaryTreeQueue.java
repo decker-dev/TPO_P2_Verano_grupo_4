@@ -1,19 +1,19 @@
 package org.example.model;
 
-public class StaticQueue implements Queue {
+public class StaticBinaryTreeQueue implements BinaryTreeQueue {
 
     private static final int MAX = 10000;
 
-    private final int[] array;
+    private final BinaryTree[] array;
     private int count;
 
-    public StaticQueue() {
-        this.array = new int[MAX];
+    public StaticBinaryTreeQueue() {
+        this.array = new BinaryTree[MAX];
         this.count = 0;
     }
 
     @Override
-    public int getFirst() {
+    public BinaryTree getFirst() {
         if (this.isEmpty()) {
             throw new RuntimeException("No se puede obtener el primero de una cola vacia");
         }
@@ -26,7 +26,7 @@ public class StaticQueue implements Queue {
     }
 
     @Override
-    public void add(int a) {
+    public void add(BinaryTree a) {
         this.array[count] = a;
         this.count++;
     }

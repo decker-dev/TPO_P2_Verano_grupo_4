@@ -7,17 +7,17 @@ public class DynamicPriorityQueue implements PriorityQueue {
     private PriorityNode first;
 
     @Override
-    public int getFirst() { // C + C + C + C + C // C
-        if(this.isEmpty()) {
+    public int getFirst() {
+        if (this.isEmpty()) {
             throw new RuntimeException("No se puede obtener el valor de una cola vacía"); // C
         } else {
-            return this.first.getValue(); // C + C + C = C
+            return this.first.getValue();
         }
     }
 
     @Override
     public int getPriority() {
-        if(this.isEmpty()) {
+        if (this.isEmpty()) {
             throw new RuntimeException("No se puede obtener la prioridad de una cola vacía");
         }
         return this.first.getPriority();
@@ -30,13 +30,13 @@ public class DynamicPriorityQueue implements PriorityQueue {
 
     @Override
     public void add(int a, int priority) {
-        if(this.isEmpty()) {
+        if (this.isEmpty()) {
             this.first = new PriorityNode(a, priority, null);
             return;
         }
 
-        if(this.first.getNext() == null) {
-            if(priority < this.first.getPriority()) {
+        if (this.first.getNext() == null) {
+            if (priority < this.first.getPriority()) {
                 this.first = new PriorityNode(a, priority, this.first);
                 return;
             }
@@ -44,15 +44,15 @@ public class DynamicPriorityQueue implements PriorityQueue {
             return;
         }
 
-        if(priority < this.first.getPriority()) {
+        if (priority < this.first.getPriority()) {
             this.first = new PriorityNode(a, priority, this.first);
             return;
         }
 
         int minPriority = getMinPriority();
-        if(priority >= minPriority) {
+        if (priority >= minPriority) {
             PriorityNode candidate = this.first;
-            while(candidate.getNext() != null) {
+            while (candidate.getNext() != null) {
                 candidate = candidate.getNext();
             }
             candidate.setNext(new PriorityNode(a, priority, null));
@@ -62,8 +62,8 @@ public class DynamicPriorityQueue implements PriorityQueue {
         PriorityNode backup = this.first;
         PriorityNode current = this.first.getNext();
 
-        while(current.getNext() != null) {
-            if(current.getPriority() > priority) {
+        while (current.getNext() != null) {
+            if (current.getPriority() > priority) {
                 break;
             }
             backup = current;
@@ -73,26 +73,25 @@ public class DynamicPriorityQueue implements PriorityQueue {
         backup.setNext(new PriorityNode(a, priority, current));
     }
 
-    private int getMinPriority() { // C + C + C + N*C + C = N
-        if(this.isEmpty()) {
+    private int getMinPriority() {
+        if (this.isEmpty()) {
             throw new RuntimeException("No se puede obtener la prioridad de una cola vacía");
         }
-        int candidate = Integer.MIN_VALUE; // C
-        PriorityNode aux = this.first; // C
+        int candidate = Integer.MIN_VALUE;
+        PriorityNode aux = this.first;
 
-        // condicion + n*(complejidad del cuerpo)
-        while(aux != null) { // C + N*C
-            if(aux.getPriority() > candidate) {
+        while (aux != null) {
+            if (aux.getPriority() > candidate) {
                 candidate = aux.getPriority();
             }
             aux = aux.getNext();
         }
-        return candidate; // C
+        return candidate;
     }
 
     @Override
     public void remove() {
-        if(this.isEmpty()) {
+        if (this.isEmpty()) {
             throw new RuntimeException("No se puede desacolar una cola vacía");
         }
         this.first = this.first.getNext();

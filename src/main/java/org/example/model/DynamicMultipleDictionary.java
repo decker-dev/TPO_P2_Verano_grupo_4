@@ -9,17 +9,17 @@ public class DynamicMultipleDictionary implements MultipleDictionary {
 
     @Override
     public List get(int key) {
-        if(this.node == null) {
+        if (this.node == null) {
             throw new RuntimeException("No se puede obtener un valor de una estructura vacía");
         }
         MultipleDictionaryNode aux = this.node;
-        while(aux.getNext() != null) {
-            if(aux.getKey() == key) {
+        while (aux.getNext() != null) {
+            if (aux.getKey() == key) {
                 return map(aux.getValue());
             }
             aux = aux.getNext();
         }
-        if(aux.getKey() == key) {
+        if (aux.getKey() == key) {
             return map(aux.getValue());
         }
 
@@ -29,7 +29,7 @@ public class DynamicMultipleDictionary implements MultipleDictionary {
     private List map(Node node) {
         List list = new LinkedList();
         Node aux = node;
-        while(aux != null) {
+        while (aux != null) {
             list.add(aux.getValue());
             aux = aux.getNext();
         }
@@ -41,7 +41,7 @@ public class DynamicMultipleDictionary implements MultipleDictionary {
         Set result = new StaticSet();
 
         MultipleDictionaryNode aux = this.node;
-        while(aux != null) {
+        while (aux != null) {
             result.add(aux.getKey());
             aux = aux.getNext();
         }
@@ -51,17 +51,17 @@ public class DynamicMultipleDictionary implements MultipleDictionary {
 
     @Override
     public void add(int key, int value) {
-        if(this.node == null) {
+        if (this.node == null) {
             this.node = new MultipleDictionaryNode(key, new Node(value, null), null);
             return;
         }
 
         MultipleDictionaryNode aux = this.node;
-        while(aux.getNext() != null) {
-            if(aux.getKey() == key) {
+        while (aux.getNext() != null) {
+            if (aux.getKey() == key) {
                 Node aux2 = aux.getValue();
 
-                while(aux2.getNext() != null) {
+                while (aux2.getNext() != null) {
                     aux2 = aux2.getNext();
                 }
 
@@ -71,10 +71,10 @@ public class DynamicMultipleDictionary implements MultipleDictionary {
             aux = aux.getNext();
         }
 
-        if(aux.getKey() == key) {
+        if (aux.getKey() == key) {
             Node aux2 = aux.getValue();
 
-            while(aux2.getNext() != null) {
+            while (aux2.getNext() != null) {
                 aux2 = aux2.getNext();
             }
 
@@ -87,14 +87,14 @@ public class DynamicMultipleDictionary implements MultipleDictionary {
 
     @Override
     public void remove(int key, int value) {
-        if(this.node == null) {
+        if (this.node == null) {
             throw new RuntimeException("La clave no existe");
         }
 
-        if(this.node.getNext() == null) {
-            if(this.node.getKey() == key) {
-                if(this.node.getValue().getNext() == null) {
-                    if(this.node.getValue().getValue() == value) {
+        if (this.node.getNext() == null) {
+            if (this.node.getKey() == key) {
+                if (this.node.getValue().getNext() == null) {
+                    if (this.node.getValue().getValue() == value) {
                         this.node = null;
                         return;
                     }
@@ -102,7 +102,7 @@ public class DynamicMultipleDictionary implements MultipleDictionary {
                 }
 
                 boolean result = remove(value, this.node.getValue());
-                if(!result) {
+                if (!result) {
                     throw new RuntimeException("No existe el valor para la clave indicada");
                 }
 
@@ -111,9 +111,9 @@ public class DynamicMultipleDictionary implements MultipleDictionary {
             throw new RuntimeException("La clave no existe");
         }
 
-        if(this.node.getKey() == key) {
-            if(this.node.getValue().getNext() == null) {
-                if(this.node.getValue().getValue() == value) {
+        if (this.node.getKey() == key) {
+            if (this.node.getValue().getNext() == null) {
+                if (this.node.getValue().getValue() == value) {
                     this.node = this.node.getNext();
                     return;
                 }
@@ -121,7 +121,7 @@ public class DynamicMultipleDictionary implements MultipleDictionary {
             }
 
             boolean result = remove(value, this.node.getValue());
-            if(!result) {
+            if (!result) {
                 throw new RuntimeException("No existe el valor para la clave indicada");
             }
             return;
@@ -129,17 +129,17 @@ public class DynamicMultipleDictionary implements MultipleDictionary {
 
         MultipleDictionaryNode backup = this.node;
         MultipleDictionaryNode current = this.node.getNext();
-        while(current != null) {
-            if(current.getKey() == key) {
-                if(current.getValue().getNext() == null) {
-                    if(current.getValue().getValue() == value) {
+        while (current != null) {
+            if (current.getKey() == key) {
+                if (current.getValue().getNext() == null) {
+                    if (current.getValue().getValue() == value) {
                         backup.setNext(current.getNext());
                         return;
                     }
                     throw new RuntimeException("No existe el valor para la clave indicada");
                 }
                 boolean result = remove(value, current.getValue());
-                if(!result) {
+                if (!result) {
                     throw new RuntimeException("No existe el valor para la clave indicada");
                 }
                 return;
@@ -151,18 +151,12 @@ public class DynamicMultipleDictionary implements MultipleDictionary {
         throw new RuntimeException("La clave no existe");
     }
 
-    /**
-     * Precondición: El tamaño de la lista es > 1.
-     * @param value, valor a borrar
-     * @param node, lista enlazada que tendrá borrado el nodo que contiene value
-     * @return true, si pudo borrar
-     */
     private boolean remove(int value, Node node) {
         Node backup = node;
         Node current = node.getNext();
 
-        while(current.getNext() != null) {
-            if(current.getValue() == value) {
+        while (current.getNext() != null) {
+            if (current.getValue() == value) {
                 backup.setNext(current.getNext());
                 return true;
             }
@@ -170,7 +164,7 @@ public class DynamicMultipleDictionary implements MultipleDictionary {
             current = current.getNext();
         }
 
-        if(current.getValue() == value) {
+        if (current.getValue() == value) {
             backup.setNext(current.getNext());
             return true;
         }

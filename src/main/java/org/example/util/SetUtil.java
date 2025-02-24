@@ -15,14 +15,14 @@ public class SetUtil {
         Set copy = new StaticSet();
         Set aux = new StaticSet();
 
-        while(!set.isEmpty()) {
+        while (!set.isEmpty()) {
             int element = set.choose();
             copy.add(element);
             aux.add(element);
             set.remove(element);
         }
 
-        while(!aux.isEmpty()) {
+        while (!aux.isEmpty()) {
             int element = aux.choose();
             set.add(element);
             aux.remove(element);
@@ -35,9 +35,9 @@ public class SetUtil {
         Set copy = copy(set);
         Set intersection = new StaticSet();
 
-        while(!copy.isEmpty()) {
+        while (!copy.isEmpty()) {
             int element = copy.choose();
-            if(in(element, set2)) {
+            if (in(element, set2)) {
                 intersection.add(element);
             }
             copy.remove(element);
@@ -47,9 +47,9 @@ public class SetUtil {
 
     public static boolean in(int element, Set set) {
         Set copy = copy(set);
-        while(!copy.isEmpty()) {
+        while (!copy.isEmpty()) {
             int aux = copy.choose();
-            if(aux == element) {
+            if (aux == element) {
                 return true;
             }
             copy.remove(aux);
@@ -61,11 +61,11 @@ public class SetUtil {
         Set copy = copy(set);
         Set result = new StaticSet();
 
-        while(!copy.isEmpty()) {
+        while (!copy.isEmpty()) {
             int element = copy.choose();
-                if(!in(element, set2)) {
-                    result.add(element);
-                }
+            if (!in(element, set2)) {
+                result.add(element);
+            }
             copy.remove(element);
         }
 
@@ -77,13 +77,13 @@ public class SetUtil {
         Set copy2 = copy(set2);
         Set result = new StaticSet();
 
-        while(!copy.isEmpty()) {
+        while (!copy.isEmpty()) {
             int element = copy.choose();
             result.add(element);
             copy.remove(element);
         }
 
-        while(!copy2.isEmpty()) {
+        while (!copy2.isEmpty()) {
             int element = copy2.choose();
             result.add(element);
             copy2.remove(element);
@@ -96,11 +96,11 @@ public class SetUtil {
         return difference(union(set, set2), intersection(set, set2));
     }
 
-    public static boolean subseteq(Set set, Set set2) {
+    public static boolean subsetEq(Set set, Set set2) {
         Set copy = copy(set);
-        while(!copy.isEmpty()) {
+        while (!copy.isEmpty()) {
             int element = copy.choose();
-            if(!in(element, set2)) {
+            if (!in(element, set2)) {
                 return false;
             }
             copy.remove(element);
@@ -111,7 +111,7 @@ public class SetUtil {
     public static int size(Set set) {
         Set copy = copy(set);
         int total = 0;
-        while(!copy.isEmpty()) {
+        while (!copy.isEmpty()) {
             int element = copy.choose();
             total++;
             copy.remove(element);
@@ -120,7 +120,7 @@ public class SetUtil {
     }
 
     public static boolean equals(Set set, Set set2) {
-        return subseteq(set, set2) && size(set) == size(set2);
+        return subsetEq(set, set2) && size(set) == size(set2);
     }
 
     public static SetOfSet parts(Set set) {
@@ -130,7 +130,7 @@ public class SetUtil {
 
         int count = (int) Math.pow(2, size);
 
-        for(int i = 0; i < count; i++) {
+        for (int i = 0; i < count; i++) {
             boolean[] pArray = map(i, count);
             result.add(map(array, pArray));
         }
@@ -139,8 +139,8 @@ public class SetUtil {
 
     private static Set map(int[] array, boolean[] pArray) {
         Set result = new StaticSet();
-        for(int i = 0; i < array.length; i++) {
-            if(pArray[i]) {
+        for (int i = 0; i < array.length; i++) {
+            if (pArray[i]) {
                 result.add(array[i]);
             }
         }
@@ -149,7 +149,7 @@ public class SetUtil {
 
     private static int[] map(Set set) {
         int[] result = new int[size(set)];
-        for(int i = 0; i < result.length; i++) {
+        for (int i = 0; i < result.length; i++) {
             int element = set.choose();
             result[i] = element;
             set.remove(element);
@@ -158,14 +158,14 @@ public class SetUtil {
     }
 
     private static boolean[] map(int a, int length) {
-        if(length == 0 || a < 0) {
+        if (length == 0 || a < 0) {
             throw new RuntimeException();
         }
         boolean[] result = new boolean[length];
         int i = 0;
         int aux = a;
-        while(aux != 0) {
-            if(i >= length) {
+        while (aux != 0) {
+            if (i >= length) {
                 throw new RuntimeException();
             }
             result[i] = aux % 2 == 1;

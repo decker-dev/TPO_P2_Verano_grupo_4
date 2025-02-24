@@ -1,12 +1,12 @@
 package org.example.model;
 
-public class DynamicBinaryTree implements BinaryTree {
+public class DynamicXBinaryTree implements XBinaryTree {
 
     private final int root;
-    private BinaryTree left;
-    private BinaryTree right;
+    private XBinaryTree left;
+    private XBinaryTree right;
 
-    public DynamicBinaryTree(int root) {
+    public DynamicXBinaryTree(int root) {
         this.root = root;
     }
 
@@ -16,29 +16,35 @@ public class DynamicBinaryTree implements BinaryTree {
     }
 
     @Override
-    public BinaryTree getLeft() {
+    public XBinaryTree getLeft() {
         return this.left;
     }
 
     @Override
-    public BinaryTree getRight() {
+    public XBinaryTree getRight() {
         return this.right;
     }
 
     @Override
-    public void addLeft(int a) {
+    public void insertLeft(XBinaryTree left) {
+        if(left == this) {
+            throw new RuntimeException("No se puede agregar el hijo izquierdo porque se genera un ciclo");
+        }
         if (this.left != null) {
             throw new RuntimeException("Ya existe un hijo izquierdo");
         }
-        this.left = new DynamicBinaryTree(a);
+        this.left = left;
     }
 
     @Override
-    public void addRight(int a) {
+    public void insertRight(XBinaryTree right) {
+        if(right == this) {
+            throw new RuntimeException("No se puede agregar el hijo izquierdo porque se genera un ciclo");
+        }
         if (this.right != null) {
             throw new RuntimeException("Ya existe un hijo derecho");
         }
-        this.right = new DynamicBinaryTree(a);
+        this.right = right;
     }
 
     @Override
