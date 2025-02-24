@@ -1,5 +1,7 @@
-A) Lista
+# Final Adelantado 2024 2C 
 
-B) Grafo
+## PUNTO 3
 
-C) Árbol
+1. Lista
+2. Grafo
+3. Árbol

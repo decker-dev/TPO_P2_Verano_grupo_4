@@ -7,6 +7,10 @@ cual no permite acceso aleatorio eficiente. En lugar de ello, se optó por una i
 en el futuro se utiliza una estructura con acceso aleatorio, la búsqueda binaria pueda ser implementada sin mayores
 cambios en la lógica de ordenación y manejo de duplicados.
 
+## PUNTO 2
+
+Falto el B
+
 ## PUNTO 3
 
 ### A)
