@@ -1,4 +1,4 @@
-package org.example.final_2025.model.nodes;
+package org.example.final_2025.punto_1.model.nodes;
 
 public class Node {
 

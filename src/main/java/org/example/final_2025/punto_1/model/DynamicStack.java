@@ -1,6 +1,6 @@
-package org.example.final_2025.model;
+package org.example.final_2025.punto_1.model;
 
-import org.example.final_2025.model.nodes.Node;
+import org.example.final_2025.punto_1.model.nodes.Node;
 
 public class DynamicStack implements Stack {
 
