@@ -3,7 +3,7 @@
 ## PUNTO 1
 
 la razón principal de no aplicar búsqueda binaria es la naturaleza de la estructura (lista enlazada), la
-cual no permite acceso aleatorio eficiente. En lugar de ello, se optó por una inserción ordenada que garantiza que, si
+cual no permite acceso aleatorio eficiente. En lugar, se optó por una inserción ordenada que garantiza que, si
 en el futuro se utiliza una estructura con acceso aleatorio, la búsqueda binaria pueda ser implementada sin mayores
 cambios en la lógica de ordenación y manejo de duplicados.
 
