@@ -70,6 +70,8 @@ public class StaticGraph implements Graph {
             for (int i = 0; i < before; i++) {
                 this.adjacencyMatrix[i][index] = this.adjacencyMatrix[i][after];
                 this.adjacencyMatrix[index][i] = this.adjacencyMatrix[after][i];
+                this.adjacencyMatrix[i][after] = 0;
+                this.adjacencyMatrix[after][i] = 0;
             }
 
             this.dictionary.remove(last);
@@ -81,12 +83,12 @@ public class StaticGraph implements Graph {
     }
 
     @Override
-    public Set nodes() {
+    public Set getNodes() {
         return this.dictionary.getKeys();
     }
 
     @Override
-    public void addEdge(int from, int to) {
+    public void addEdge(int from, int to, int weight) {
         if (this.notIn(from) || this.notIn(to)) {
             throw new RuntimeException("No existe alguno de los nodos");
         }
@@ -98,10 +100,7 @@ public class StaticGraph implements Graph {
             throw new RuntimeException("Ya existe la arista");
         }
 
-        Random random = new Random();
-        int x = random.nextInt(1, 100);
-
-        this.adjacencyMatrix[indexFrom][indexTo] = x;
+        this.adjacencyMatrix[indexFrom][indexTo] = weight;
     }
 
     private double randomProbability() {

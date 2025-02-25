@@ -22,15 +22,16 @@ public interface Graph {
     /**
      * @return conjunto con todos los nodos presentes.
      */
-    Set nodes();
+    Set getNodes();
 
     /**
      * Precondicion: No existe la arista pero existen los nodos.
      *
      * @param from, nodo del cual sale la arista.
      * @param to,   nodo al cual llega la arista.
+     * @param weight, peso de la arista
      */
-    void addEdge(int from, int to);
+    void addEdge(int from, int to, int weight);
 
     /**
      * Precondicion: Existe la arista
