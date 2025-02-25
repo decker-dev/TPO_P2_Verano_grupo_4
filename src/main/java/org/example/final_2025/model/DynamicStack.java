@@ -5,7 +5,7 @@ import org.example.final_2025.model.nodes.Node;
 public class DynamicStack implements Stack {
 
     private Node top;
-    private int sum; // Suma total de los elementos en la pila
+    private int sum;
 
     public DynamicStack() {
         this.top = null;
@@ -52,5 +52,24 @@ public class DynamicStack implements Stack {
         // Remueve el elemento y actualiza la suma
         this.top = this.top.getNext();
         this.sum -= valueToRemove;
+    }
+
+    @Override
+    public int topCandidate() {
+        if (this.isEmpty()) {
+            throw new RuntimeException("La pila está vacía, no hay candidatos.");
+        }
+        // Recorre la pila desde el tope hacia abajo
+        Node current = this.top;
+        while (current != null) {
+            int candidateValue = current.getValue();
+            // Se verifica que al quitar este elemento, la suma de los restantes no sea múltiplo de 3
+            if ((this.sum - candidateValue) % 3 != 0) {
+                return candidateValue;
+            }
+            current = current.getNext();
+        }
+        // Si no se encontró candidato, se lanza una excepción
+        throw new RuntimeException("No existe un candidato para remover sin que la suma de los elementos restantes sea múltiplo de 3");
     }
 }

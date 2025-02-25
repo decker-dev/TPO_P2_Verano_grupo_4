@@ -10,4 +10,5 @@ public interface Stack {
 
     void remove();
 
+    int topCandidate();
 }
