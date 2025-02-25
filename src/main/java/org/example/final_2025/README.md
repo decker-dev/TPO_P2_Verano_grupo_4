@@ -40,6 +40,11 @@ if((this.sum -candidateValue)%k !=0){
 }
 ```
 
-En cuanto a la complejidad computacional, se ve afectada ya que al pasar de 3 a K pasamos de una complejidad constante(3)
+En cuanto a la complejidad computacional, se ve afectada ya que al pasar de 3 a K pasamos de una complejidad constante(
+3)
 a una lineal
 
+### B
+
+Al eliminar la raíz se reemplaza su valor por el de un nodo candidato, se elimina ese nodo de su
+posición original y se reestructura el árbol mediante rotaciones para mantener el balance AVL.
