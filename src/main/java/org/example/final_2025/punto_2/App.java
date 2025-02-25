@@ -6,6 +6,8 @@ import org.example.final_2025.punto_2.model.Dictionary;
 import org.example.final_2025.punto_2.util.MultipleDictionaryUtil;
 import org.example.final_2025.punto_2.util.DictionaryUtil;
 
+import static org.example.final_2025.punto_2.util.BinaryTreeUtil.couldBeStaticBinaryTreeAttribute;
+
 public class App {
     public static void main(String[] args) {
         // Caso 1: Diccionario múltiple válido para conversión
@@ -43,5 +45,34 @@ public class App {
         } catch (RuntimeException e) {
             System.out.println("Error durante la conversión: " + e.getMessage());
         }
+
+
+        // Caso 1: [1, 2, 3, 0, 0, 1]
+        // Se asume que 0 es un valor válido (no indicador de ausencia)
+        Integer[] array1 = {1, 2, 3, 0, 0, 1};
+        System.out.println("Array1 [1,2,3,0,0,1] es un árbol binario? " +
+                couldBeStaticBinaryTreeAttribute(array1)); // true
+
+        // Caso 2: [1, null, 3]
+        Integer[] array2 = {1, null, 3};
+        System.out.println("Array2 [1,null,3] es un árbol binario? " +
+                couldBeStaticBinaryTreeAttribute(array2)); // true
+
+        // Caso 3: [1, null, null, 4]
+        // Aquí, el nodo 4 (índice 3) tiene como padre el índice 1, que es null.
+        Integer[] array3 = {1, null, null, 4};
+        System.out.println("Array3 [1,null,null,4] es un árbol binario? " +
+                couldBeStaticBinaryTreeAttribute(array3)); // false
+
+        // Caso 4: [null, 2, 3]
+        Integer[] array4 = {null, 2, 3};
+        System.out.println("Array4 [null,2,3] es un árbol binario? " +
+                couldBeStaticBinaryTreeAttribute(array4)); // false
+
+        // Caso 5: [1]
+        Integer[] array5 = {1};
+        System.out.println("Array5 [1] es un árbol binario? " +
+                couldBeStaticBinaryTreeAttribute(array5)); // true
+
     }
 }

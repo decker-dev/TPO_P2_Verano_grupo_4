@@ -113,4 +113,33 @@ public class BinaryTreeUtil {
                         Math.max(min, binaryTree.getRoot()),
                         max);
     }
+    /**
+     * Verifica si un arreglo de Integer podría ser el atributo interno de la
+     * implementación estática de árbol binario.
+     *
+     * Para ello se requiere que:
+     *  - El primer elemento (índice 0) no sea null.
+     *  - Para cada índice i > 0, si array[i] no es null, entonces el elemento
+     *    en la posición (i - 1) / 2 (el padre) también debe existir (no ser null).
+     *
+     * @param array el arreglo de Integer a verificar
+     * @return true si el arreglo cumple la condición, false de lo contrario
+     */
+    public static boolean couldBeStaticBinaryTreeAttribute(Integer[] array) {
+        if (array == null || array.length == 0) {
+            return false;
+        }
+        if (array[0] == null) {
+            return false;
+        }
+        for (int i = 1; i < array.length; i++) {
+            if (array[i] != null) {
+                int parentIndex = (i - 1) / 2;
+                if (array[parentIndex] == null) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 }
